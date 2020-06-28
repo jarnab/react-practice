@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+import InitialCountForm from './InitialCountForm'
+import Button from 'react-bootstrap/Button'
 
 class Counter extends Component {
-    state = {
-        count : 0
-    }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0
+        };
+        
+    }
+    handleParentData = (formModel) => {
+        this.setState({...formModel});
+      }
     incrementCount() {
        this.setState({count : this.state.count+1}) ;
     }
@@ -15,10 +24,13 @@ class Counter extends Component {
         return (
             <div>
                 <div>
-                <button onClick={e => this.incrementCount()}>Increment</button>
-                <button onClick={e => this.decrementCount()}>Decrement</button> 
+                <Button variant="primary" onClick={e => this.incrementCount()}>Increment</Button>
+                <Button onClick={e => this.decrementCount()}>Decrement</Button> 
                 </div>
-                <div>{this.state.count}</div>
+                <div>Current Count:{this.state.count}</div>
+                <br /><br />
+                <InitialCountForm handleData={this.handleParentData}/>
+                
             </div>
         );
     }
